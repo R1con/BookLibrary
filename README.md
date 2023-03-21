@@ -23,7 +23,7 @@
 ### Предварительная установка
 Для локально запуска приложения в Android Studio нужно установить плагин Lombok для корректной работы.
 
-1. Перейдите в папку где находиться Android Studio: C:\Program Files\Android\Android Studio\plugins
+1. Перейдите в папку где находиться Android Studio: C:\Program Files\Android\Android Studio\plugins (зависимо от вашей ОС перейдите папку где установлена Android Studio и перейдите в папку plugins)
 2. Скачайте плагин с сайта https://plugins.jetbrains.com/plugin/6317-lombok/versions
 3. Перенесите папку lombok-plugin в папку из пункта 1.
 4. Запускайте приложение
