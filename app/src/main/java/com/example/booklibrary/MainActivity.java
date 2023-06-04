@@ -28,10 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String QUESTION_MESSAGE_DELETE_ALL = "Вы уверены что хотите удалить все книги?";
-    public static final String TITLE_DELETE_ALL_BOOK = "Удалить все книги?";
-    public static final String BUTTON_NAME_YES = "Да";
-    public static final String BUTTON_NAME_NO = "Нет";
 
     private ImageView emptyImageview;
     private TextView noDataText;
