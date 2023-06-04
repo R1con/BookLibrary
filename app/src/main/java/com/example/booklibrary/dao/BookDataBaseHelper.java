@@ -52,9 +52,9 @@ public class BookDataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_PAGES, pages);
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         if (isError(result)) {
-            makeText(context, "Произошла ошибка при добавлении книги. Повторите еще раз", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Произошла ошибка при добавлении книги. Повторите еще раз", Toast.LENGTH_SHORT).show();
         } else {
-            makeText(context, "Книга добавлена!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Книга добавлена!", Toast.LENGTH_SHORT).show();
         }
     }
 

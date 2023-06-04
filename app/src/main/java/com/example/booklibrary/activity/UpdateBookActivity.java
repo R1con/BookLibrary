@@ -16,12 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.booklibrary.R;
 import com.example.booklibrary.common.enums.BookColumnName;
 import com.example.booklibrary.dao.BookDataBaseHelper;
-import com.example.booklibrary.interfaces.Validable;
 
-import org.apache.commons.lang3.StringUtils;
-
-public class UpdateBookActivity extends AppCompatActivity implements Validable {
-    public static final int MAX_LENGTH_EDIT_TEXT = 20;
+public class UpdateBookActivity extends AppCompatActivity {
 
     private EditText titleInput;
     private EditText authorInput;
@@ -51,16 +47,13 @@ public class UpdateBookActivity extends AppCompatActivity implements Validable {
         }
 
         updateButton.setOnClickListener(view -> {
-            if (validate()) {
                 new UpdateBookTask().execute();
-            }
         });
 
         deleteButton.setOnClickListener(view -> confirmDialog());
     }
 
     private class UpdateBookTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... voids) {
             try (BookDataBaseHelper bookDataBaseHelper = new BookDataBaseHelper(UpdateBookActivity.this)) {
@@ -78,37 +71,8 @@ public class UpdateBookActivity extends AppCompatActivity implements Validable {
         @Override
         protected void onPostExecute(Void unused) {
             Toast.makeText(UpdateBookActivity.this, "Книга успешно обновлена!", Toast.LENGTH_SHORT).show();
+            finish();
         }
-    }
-
-    @Override
-    public boolean validate() {
-        if (StringUtils.isEmpty(titleInput.getText().toString()) || StringUtils.isEmpty(authorInput.getText().toString()) ||
-                StringUtils.isEmpty(pagesInput.getText().toString())) {
-            Toast.makeText(UpdateBookActivity.this, "Пожалуйста, заполните все поля!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (!StringUtils.isNumeric(pagesInput.getText().toString())) {
-            Toast.makeText(UpdateBookActivity.this, "Страницы могут быть только числом!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (StringUtils.isWhitespace(titleInput.getText().toString()) || StringUtils.isWhitespace(authorInput.getText().toString()) ||
-                StringUtils.isWhitespace(pagesInput.getText().toString())) {
-            Toast.makeText(UpdateBookActivity.this, "Поля не могут быть пробелом!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (titleInput.getText().toString().length() > MAX_LENGTH_EDIT_TEXT ||
-                authorInput.getText().toString().length() > MAX_LENGTH_EDIT_TEXT) {
-            Toast.makeText(UpdateBookActivity.this, "Длина поля автор/название не может превышать 30 символов!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-
-
-        return true;
     }
 
     public void getAndSetIntentData() {
@@ -123,9 +87,8 @@ public class UpdateBookActivity extends AppCompatActivity implements Validable {
             titleInput.setText(title);
             authorInput.setText(author);
             pagesInput.setText(pages);
-            Log.d("update", title + " " + author + " " + pages);
         } else {
-            makeText(this, "Произошла ошибка. Книга не обновлена", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Произошла ошибка. Книга не обновлена", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -141,7 +104,6 @@ public class UpdateBookActivity extends AppCompatActivity implements Validable {
     }
 
     private class DeleteBookTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... voids) {
             try (BookDataBaseHelper myDB = new BookDataBaseHelper(UpdateBookActivity.this)) {
@@ -157,6 +119,7 @@ public class UpdateBookActivity extends AppCompatActivity implements Validable {
         @Override
         protected void onPostExecute(Void unused) {
             Toast.makeText(UpdateBookActivity.this, "Книга успешно удалена!", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 }

@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
     void confirmDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle(TITLE_DELETE_ALL_BOOK);
-        alertDialog.setMessage(QUESTION_MESSAGE_DELETE_ALL);
-        alertDialog.setPositiveButton(BUTTON_NAME_YES, (dialogInterface, i) -> {
+        alertDialog.setTitle("Удалить все книги?");
+        alertDialog.setMessage("Вы уверены что хотите удалить все книги?");
+        alertDialog.setPositiveButton("Да", (dialogInterface, i) -> {
             try (BookDataBaseHelper bookDataBaseHelper = new BookDataBaseHelper(MainActivity.this)) {
                 bookDataBaseHelper.deleteAll();
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        alertDialog.setNegativeButton(BUTTON_NAME_NO, (dialogInterface, i) -> {});
+        alertDialog.setNegativeButton("Нет", (dialogInterface, i) -> {
+        });
         alertDialog.create().show();
     }
 
@@ -135,16 +136,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showBooks(Cursor cursor) {
-        AsyncTask.execute(() -> {
-            while (cursor.moveToNext()) {
-                bookIds.add(cursor.getString(BookColumnNumber.ID.getColumn()));
-                bookTitles.add(cursor.getString(BookColumnNumber.TITLE.getColumn()));
-                bookAuthors.add(cursor.getString(BookColumnNumber.AUTHOR.getColumn()));
-                bookPages.add(cursor.getString(BookColumnNumber.PAGES.getColumn()));
-            }
-            emptyImageview.setVisibility(View.GONE);
-            noDataText.setVisibility(View.GONE);
-        });
+        while (cursor.moveToNext()) {
+            bookIds.add(cursor.getString(BookColumnNumber.ID.getColumn()));
+            bookTitles.add(cursor.getString(BookColumnNumber.TITLE.getColumn()));
+            bookAuthors.add(cursor.getString(BookColumnNumber.AUTHOR.getColumn()));
+            bookPages.add(cursor.getString(BookColumnNumber.PAGES.getColumn()));
+        }
+
+        emptyImageview.setVisibility(View.GONE);
+        noDataText.setVisibility(View.GONE);
+
     }
 
     private boolean isEmptyBook(int countBook) {

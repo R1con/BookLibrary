@@ -20,16 +20,23 @@ import com.example.booklibrary.common.enums.BookColumnName;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
+
     private Context context;
     private List<String> bookIds;
     private List<String> bookTitles;
     private List<String> bookAuthor;
     private List<String> bookPages;
     private Activity activity;
+
+    public BookAdapter(Context context, List<String> bookIds, List<String> bookTitles, List<String> bookAuthor, List<String> bookPages, Activity activity) {
+        this.context = context;
+        this.bookIds = bookIds;
+        this.bookTitles = bookTitles;
+        this.bookAuthor = bookAuthor;
+        this.bookPages = bookPages;
+        this.activity = activity;
+    }
 
     @NonNull
     @Override
