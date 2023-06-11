@@ -52,8 +52,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     // https://mvnrepository.com/artifact/com.google.firebase/firebase-common
-    implementation group: 'com.google.firebase', name: 'firebase-common', version: '15.0.0'
     implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.firebase:firebase-client-android:2.3.1'
 
 
 }

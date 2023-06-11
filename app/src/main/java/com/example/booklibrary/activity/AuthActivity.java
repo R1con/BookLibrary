@@ -36,7 +36,6 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         TextView tvRegistration;
-        Intent registrationPage;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
@@ -48,7 +47,7 @@ public class AuthActivity extends AppCompatActivity {
         tvRegistration = (TextView) findViewById(R.id.textViewRegistation);
 
         firstPage = new Intent(this, MainActivity.class);
-        registrationPage = new Intent(this, AddBookActivity.class); // todo change class to replace class
+        Intent registrationPage = new Intent(this, RegistrationActivity.class);
 
         fireBaseAuth = FirebaseAuth.getInstance();
         tvRegistration.setOnClickListener(view -> startActivity(registrationPage));
